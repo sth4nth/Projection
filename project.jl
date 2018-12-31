@@ -39,7 +39,7 @@ function dcd(x, A, b)
     # dual coordinate descent
     steps = 100
     d, q = size(A)
-    v = rand(q)
+    v = zeros(q)
     for t = 1:steps
         for k = 1:q
             a = A[:,k]
