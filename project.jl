@@ -28,15 +28,15 @@ function project0(x, A, b)
 end
 
 function elim(x, A, b)
-    # Eliminating equality constraints
+    # eliminating equality constraints method
     W = nullspace(A')'
     m = -A'\b
     z = (W*W')\W*(x-m)
     x = W'*z+m
 end
 
-function dcd(x, A, b)
-    # dual coordinate descent
+function dca(x, A, b)
+    # dual coordinate ascent method
     steps = 100
     d, q = size(A)
     v = zeros(q)
@@ -49,7 +49,8 @@ function dcd(x, A, b)
     x = x-A*v
 end
 
-function alternative_project(x, A, b)
+function vonNeumann(x, A, b)
+    # von Neumann alternative projection method
     steps = 100
     for t = 1:steps
         for k = 1:length(b)
@@ -60,6 +61,7 @@ function alternative_project(x, A, b)
 end
 
 function dykstra(x, A, b)
+    # Dykstra method
     steps = 100
     d, q = size(A)
     z = zeros(d,q)
@@ -75,6 +77,6 @@ end
 
 x = project(x0,A,b)
 xe = elim(x0,A,b)
-xa = alternative_project(x0,A,b)
+xa = vonNeumann(x0,A,b)
 xd = dykstra(x0,A,b)
-xcd = dcd(x0,A,b)
+xcd = dca(x0,A,b)
