@@ -1,7 +1,6 @@
 # min |x0-x|^2
 # s.t. A'x+b=0
 using LinearAlgebra
-using Plots
 
 d = 5
 q = 2
