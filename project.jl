@@ -9,13 +9,13 @@ A = rand(d,q)
 b = rand(q)
 
 function project(x, A, b)
-    # direct method
+    # solve primal and dual equations
     v = (A'*A)\(A'*x+b)
     x = x-A*v
 end
 
-function project0(x, A, b)
-    # master equation method
+function kkt(x, A, b)
+    # solve KKT master equation
     d, q = size(A)
     I = Diagonal(ones(d))
     O = zeros(q,q)
@@ -27,7 +27,7 @@ function project0(x, A, b)
 end
 
 function elim(x, A, b)
-    # eliminating equality constraints method
+    # eliminating constraints
     W = nullspace(A')'
     m = -A'\b
     z = (W*W')\W*(x-m)
@@ -35,7 +35,7 @@ function elim(x, A, b)
 end
 
 function dca(x, A, b)
-    # dual coordinate ascent method
+    # dual coordinate ascent
     steps = 100
     d, q = size(A)
     v = zeros(q)
@@ -49,7 +49,7 @@ function dca(x, A, b)
 end
 
 function vonNeumann(x, A, b)
-    # von Neumann alternative projection method
+    # von Neumann alternative projection
     steps = 100
     for t = 1:steps
         for k = 1:length(b)
@@ -60,7 +60,7 @@ function vonNeumann(x, A, b)
 end
 
 function dykstra(x, A, b)
-    # Dykstra method
+    # Dykstra projection
     steps = 100
     d, q = size(A)
     z = zeros(d,q)
