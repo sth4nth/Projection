@@ -68,7 +68,7 @@ function dykstra(x, A, b)
         for k = 1:q
             x0 = x
             x = project(x0+z[:,k], A[:,k], b[k])
-            z[:,k] = x0+z[:,k]-x
+            z[:,k] += x0-x
         end
     end
     x
