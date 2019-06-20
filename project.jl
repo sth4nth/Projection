@@ -62,13 +62,13 @@ end
 function dykstra(x, A, b)
     # Dykstra projection
     steps = 100
-    d, q = size(A)
-    z = zeros(d,q)
-    for i=1:steps
-        for k = 1:q
+    d,n = size(A)
+    z = zeros(d,n)
+    for t = 1:steps
+        for i = 1:n
             x0 = x
-            x = project(x0+z[:,k], A[:,k], b[k])
-            z[:,k] += x0-x
+            x = project(x0+z[:,i], A[:,i], b[i])
+            z[:,i] += x0-x
         end
     end
     x
